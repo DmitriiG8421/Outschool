@@ -56,6 +56,17 @@ def countBorrowedBooks():
          borrowedBooks.append(i)
     return len(borrowedBooks)
 
+def orderByTitle():
+    cursor = connection.cursor()
+    cursor.execute("SELECT * FROM books ORDER BY title")
+    for row in cursor:
+            if row["isBorrowed"] == True:
+                print(f'   {row["title"]} - {row["author"]} is borrowed')
+            elif row["isBorrowed"] == False:
+                 print(f'   {row["title"]} - {row["author"]} is available')
+    cursor.close()
+
+
 
 
 cursor = connection.cursor()
@@ -100,4 +111,7 @@ print("Lord of the Rings is deleted.\nNew list:")
 displayAllBooks()
 print("\n\n\n")
 
-print(f'{countBorrowedBooks()} book(s) is borrowed right now.')
+print(f'{countBorrowedBooks()} book(s) is borrowed right now.\n\n\n')
+
+print("These are the books, ordered alphabetically")
+orderByTitle()
