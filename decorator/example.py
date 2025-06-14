@@ -1,50 +1,77 @@
-#Step-1: function objects
+# class 
+# object 
+# function 
+# function object 
+# parameter 
+# argument
+# return 
 
-def greet():
-    print("Hello")
+def recipe():
+    print("This is my recipe!")
 
-hello = greet #if you save a function 
-#in a variable without using the parentheses it is called a function object. 
-# it is an object that holds your function's code
+recipe() #it will just execute the function right away!
 
-hello()
-#This is function object
-#It holds the function's code
-#So 'hello' holds the code of 'greet'
+my_recipe = recipe #function object it means you are passing the function but not the execute the function
 
+# you cannot print a function object!
 
-
-#Step-2: functions inside functions
+my_recipe() # now it will execute the recipe() function so basically recipe() function becomes my_recipe() function 
 
 def outer():
     def inner():
-        print("I am the inner function")
+        print("This is the inner function")
 
-    inner()
+    inner() 
+
 outer()
 
 
 
-#Step-3: functions returning functions
-
 def outside():
     def inside():
-        print("Hello from inner function!")
-    return inside
-       
+        print("This is the inside function")
+    return inside #you are returning the function object inside
+
+
+
+#outside() = inside
+
 my_function = outside()
+
+#my_function() = inside()
+
 my_function()
 
 
-#Step-4: passing functions to other functions 
-
-def greetings(func):
-    print("Doing something first...")
-    func()
+def greet(func):
+    print("Doing something now...")
+    func() #the parameter func is a function object!
 
 
-def say_hello():
-    print("Hello there!")
+def hello():
+    print("Hi there!")
 
 
-greetings(say_hello)
+greet(hello)
+
+
+def my_first_decorator(func):
+    def wrapper():
+        print("This line works first...")
+        func()
+        print("This is the last line...")
+    return wrapper
+
+
+# def my_regular_function():
+#     print("I am in the middle...")
+
+
+# my_wrapper = my_first_decorator(my_regular_function) #it just returns wrapper!
+
+# my_wrapper()
+
+@my_first_decorator
+def my_regular_function():
+    print("I am in the middle")
+my_regular_function()
